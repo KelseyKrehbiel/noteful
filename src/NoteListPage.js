@@ -1,19 +1,33 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {NoteStore} from './dummy-store'
+import FolderList from "./FolderList";
+import {Link} from 'react-router-dom';
 
-export default function NotePage(props) {
-  const note = NoteStore.find(p =>
-    p.id === props.match.params.noteId
-  )
+//display list of notes
+
+export default function NoteListPage(props) {
+/*   const note = NoteStore.find(p =>
+    p.notes.id === props.match.params.noteId
+  ) */
+  const notes = NoteStore.notes;
+  console.log(notes);
   return (
     <article className='note'>
-      <h2>{note.title}</h2>
-      {note.content.map((p, i) =>
-        (p === '')
-          ? <br key={i} />
-          : <p key={i}>{p}</p>
-      )}
+      <h2>Note List</h2>
+
+      <FolderList/>
+      <ul>
+        {notes.map(
+          note => 
+          <li key={note.id}>
+            <Link to={`/note/${note.id}`}>
+              <h3>{note.name}</h3>
+              <p>{note.modified}</p>
+            </Link>
+          </li>
+        )}
+  
+      </ul>
     </article>
   )
 }

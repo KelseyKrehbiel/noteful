@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
 import NoteListPage from './NoteListPage';
-import FolderPage from './FolderPage';
+import FolderView from './FolderView';
 import NotePage from './NotePage';
 
   class App extends Component {
@@ -23,7 +23,7 @@ import NotePage from './NotePage';
     return (
       <div className='App'>
         <nav>
-          <Link to='/'>Homepage</Link>
+          <Link to='/'>Note List</Link>
         </nav>
         <header>
           <h1>Noteful</h1>
@@ -35,7 +35,7 @@ import NotePage from './NotePage';
           />
           <Route
             path='/folder/:folderId'
-            component={FolderPage}
+            component={FolderView}
           />
           <Route
             path='/note/:noteId'

@@ -1,8 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import DummyStore from './dummy-store'
 
-export default function FolderPage(props){
+//display list of folders on left side of page
+//contents of folder in center of page
+
+export default function FolderRoute(props){
   return(
     <ul>
       folders
