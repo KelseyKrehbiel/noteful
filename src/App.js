@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import NoteListPage from './NoteListPage';
 import FolderView from './FolderView';
 import NotePage from './NotePage';
-import {NoteStore} from './dummy-store';
+//import {NoteStore} from './dummy-store';
 
   class App extends Component {
     constructor(props){

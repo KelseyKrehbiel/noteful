@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import {NoteStore} from './dummy-store'
+//import {NoteStore} from './dummy-store'
 
 export default function FolderList(props){
   const folderList = NoteStore.folders;

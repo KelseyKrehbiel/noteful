@@ -1,5 +1,5 @@
 import React from 'react'
-import {NoteStore} from './dummy-store';
+//import {NoteStore} from './dummy-store';
 import {Link} from 'react-router-dom';
 import FolderList from './FolderList';
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {NoteStore} from './dummy-store';
+//import {NoteStore} from './dummy-store';
 
 //Display selected note
 
