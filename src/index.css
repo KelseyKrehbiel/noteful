@@ -56,3 +56,7 @@ a{
 .folderList{
   flex-basis: 25%;
 }
+
+footer{
+  text-align: center;
+}

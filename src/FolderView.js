@@ -19,7 +19,7 @@ export default function FolderView(props){
       <div className="folderList">
         <FolderList/>
       </div>
-      <ul>
+      <ul className="noteList">
           {folderNotes.map(
             note => 
             <li key={note.id}>
