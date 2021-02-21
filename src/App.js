@@ -3,22 +3,41 @@ import { Route, Link } from 'react-router-dom';
 import NoteListPage from './NoteListPage';
 import FolderView from './FolderView';
 import NotePage from './NotePage';
+import {NoteStore} from './dummy-store';
 
   class App extends Component {
-/*
-  function Example() {
-  return <>
-    <Sidebar>
-      <Route path='/' component={MainSidebar} />
-      <Route path='/foo' component={FooSidebar} />
-    </Sidebar>
-    <Main>
-      <Route path='/' component={MainMain} />
-      <Route path='/foo' component={FooMain} />
-    </Main>
-  </>
-}
-*/
+    constructor(props){
+    super(props)
+    //initialize the note state here
+    this.state = {
+        notes: [],
+        folders: []
+      }
+    }
+    //when the component mounts get the folder and note data
+    componentDidMount(){
+      this.getNotes();
+      this.getFolders();
+      console.log(`note state is ${this.state.notes}`);
+    }
+
+
+    getNotes(){
+      const noteData = NoteStore.notes
+      this.setState({
+        notes: noteData
+      })
+    }
+    getFolders(){
+      const folderData = NoteStore.folders
+      this.setState({
+        folders: folderData
+      })
+    }
+  
+    
+
+
   render() {
     return (
       <div className='App'>

@@ -11,3 +11,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+h1,h2,h3{
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li{
+  background-color: ghostwhite;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  margin: 2px;
+}
+
+p{
+  background-color: ghostwhite;
+  border-color: black;
+}
+
+a{
+  color: black;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.listContainer{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.noteContent{
+  width: 80%;
+
+}
+
+.noteList{
+  flex-grow: 1;
+}
+
+.folderList{
+  flex-basis: 25%;
+}

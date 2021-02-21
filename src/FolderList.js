@@ -6,10 +6,10 @@ export default function FolderList(props){
   const folderList = NoteStore.folders;
   
   return(
-    <ul>
+    <ul className="folderList">
       {folderList.map(
         folder => 
-          <li key={folder.id}>
+          <li key={folder.id} className="folderItem">
             <Link to={`/folder/${folder.id}`}>
             <p>{folder.name}</p>
             </Link>

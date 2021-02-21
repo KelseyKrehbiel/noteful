@@ -3,7 +3,7 @@ import {NoteStore} from './dummy-store'
 import FolderList from "./FolderList";
 import {Link} from 'react-router-dom';
 
-//display list of notes
+//display list of notes and folders
 
 export default function NoteListPage(props) {
 /*   const note = NoteStore.find(p =>
@@ -12,14 +12,15 @@ export default function NoteListPage(props) {
   const notes = NoteStore.notes;
   console.log(notes);
   return (
-    <article className='note'>
-      <h2>Note List</h2>
-
+    <article className='noteArticle'>
+      <h2>All Notes</h2>
+      <div className="listContainer">
       <FolderList/>
-      <ul>
+     
+      <ul className="noteList">
         {notes.map(
           note => 
-          <li key={note.id}>
+          <li key={note.id} className="noteItem">
             <Link to={`/note/${note.id}`}>
               <h3>{note.name}</h3>
               <p>{note.modified}</p>
@@ -28,6 +29,7 @@ export default function NoteListPage(props) {
         )}
   
       </ul>
+      </div>
     </article>
   )
 }

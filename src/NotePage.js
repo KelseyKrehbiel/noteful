@@ -1,6 +1,5 @@
 import React from 'react'
 import {NoteStore} from './dummy-store';
-import FolderList from './FolderList';
 
 //Display selected note
 
@@ -27,12 +26,12 @@ export default function NotePage(props){
 )
 
   return(
-    <div>
+    <div className="listContainer">
 
-      <div className="folderNav">
+      <div className="folderList">
         {folderData.name}
       </div>
-      <p>
+      <p className="noteContent">
         <h1>{noteData.name}</h1>
         <p>{noteData.modified}</p>
         {noteData.content}

@@ -12,13 +12,9 @@ export default function FolderView(props){
   //need a button to go back to list
   const folderNotes = NoteStore.notes.filter((note)=>note.folderId === props.match.params.folderId);
   console.log(folderNotes);
-  
-  const folderData = NoteStore.folders.find(folder =>
-    folder.id === props.match.params.folderId
-  )
-
+ 
   return(
-    <div>
+    <div className="listContainer">
       
       <div className="folderList">
         <FolderList/>
