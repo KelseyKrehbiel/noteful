@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{useContext} from 'react'
 //import {NoteStore} from './dummy-store';
 import {Link} from 'react-router-dom';
 import FolderList from './FolderList';
+import noteContext from './noteContext';
 
 //display list of folders on left side of page
 //contents of folder in center of page
@@ -10,7 +11,7 @@ export default function FolderView(props){
   //display folder name on left side
   //display list of notes that belong to folder
   //need a button to go back to list
-  const folderNotes = NoteStore.notes.filter((note)=>note.folderId === props.match.params.folderId);
+  const folderNotes = useContext(noteContext).notes.filter((note)=>note.folderId === props.match.params.folderId);
   console.log(folderNotes);
  
   return(

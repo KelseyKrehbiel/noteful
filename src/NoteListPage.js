@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useContext} from 'react'
 //import {NoteStore} from './dummy-store'
 import FolderList from "./FolderList";
 import {Link} from 'react-router-dom';
+import noteContext from './noteContext';
+
 
 //display list of notes and folders
 
@@ -9,7 +11,7 @@ export default function NoteListPage(props) {
 /*   const note = NoteStore.find(p =>
     p.notes.id === props.match.params.noteId
   ) */
-  const notes = NoteStore.notes;
+  const notes = useContext(noteContext).notes;
   console.log(notes);
   return (
     <article className='noteArticle'>

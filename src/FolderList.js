@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Link } from 'react-router-dom';
 //import {NoteStore} from './dummy-store'
+import noteContext from './noteContext';
 
 export default function FolderList(props){
-  const folderList = NoteStore.folders;
+  const folderList = useContext(noteContext).folders;
   
   return(
     <ul className="folderList">
