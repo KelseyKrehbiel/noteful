@@ -3,6 +3,7 @@ import React,{useContext} from 'react'
 import FolderList from "./FolderList";
 import {Link} from 'react-router-dom';
 import noteContext from './noteContext';
+import DeleteButton from './DeleteButton';
 
 
 //display list of notes and folders
@@ -11,7 +12,7 @@ export default function NoteListPage(props) {
 /*   const note = NoteStore.find(p =>
     p.notes.id === props.match.params.noteId
   ) */
-  const notes = useContext(noteContext).notes;
+  const notes = useContext(noteContext).state.notes;
   console.log(notes);
   return (
     <article className='noteArticle'>
@@ -26,6 +27,7 @@ export default function NoteListPage(props) {
             <Link to={`/note/${note.id}`}>
               <h3>{note.name}</h3>
               <p>{note.modified}</p>
+              <DeleteButton noteId={note.id}/>
             </Link>
           </li>
         )}

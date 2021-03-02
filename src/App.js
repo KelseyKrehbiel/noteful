@@ -7,63 +7,59 @@ import config from './config';
 import noteContext from './noteContext'
 //import {NoteStore} from './dummy-store';
 
-  class App extends Component {
-    constructor(props){
-    super(props)
-    //initialize the note state here
-    this.state = {
-        notes: [],
-        folders: []
-      }
+class App extends Component {
+  constructor(props){
+  super(props)
+  //initialize the note state here
+  this.state = {
+      notes: [],
+      folders: []
     }
-    //when the component mounts get the folder and note data
-    componentDidMount(){
-      Promise.all([
-            fetch(`${config.API_ENDPOINT}/notes`),
-            fetch(`${config.API_ENDPOINT}/folders`)
-        ])//save note response to notesRes
-            .then(([notesRes, foldersRes]) => {
-                if (!notesRes.ok)
-                //if not OK return the error
-                    return notesRes.json().then(e => Promise.reject(e));
-                if (!foldersRes.ok)
-                    return foldersRes.json().then(e => Promise.reject(e));
+  }
 
-                return Promise.all([notesRes.json(), foldersRes.json()]);
-            })
-            .then(([notes, folders]) => {
-                this.setState({notes, folders});
-            })
-            .catch(error => {
-                console.error({error});
-            });
+  fetchServerData = () =>{
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/notes`),
+      fetch(`${config.API_ENDPOINT}/folders`)
+    ])//save note response to notesRes
+      .then(([notesRes, foldersRes]) => {
+          if (!notesRes.ok)
+          //if not OK return the error
+              return notesRes.json().then(e => Promise.reject(e));
+          if (!foldersRes.ok)
+              return foldersRes.json().then(e => Promise.reject(e));
 
-        console.log(`note state is ${this.state.notes}`);
-        console.log(`folder state is ${this.state.folders}`);
-    }
-
-
-/* 
-    getNotes(){
-      const noteData = NoteStore.notes
-      this.setState({
-        notes: noteData
+          return Promise.all([notesRes.json(), foldersRes.json()]);
       })
-    }
-    getFolders(){
-      const folderData = NoteStore.folders
-      this.setState({
-        folders: folderData
-      })
-    }
-   */
-  
+        .then(([notes, folders]) => {
+            this.setState({notes, folders});
+            console.log(this.state.notes);
+            console.log(this.state.folders);
+        })
+        .catch(error => {
+            console.error({error});
+        });
 
+
+  }
+
+  //when the component mounts get the folder and note data
+  componentDidMount(){
+    this.fetchServerData();
+  }
+
+  handleDeleteNote = (noteID) =>{
+    const currentNotes = this.state.notes.filter((note) =>note.id!==noteID)
+    this.setState({notes: currentNotes})
+    console.log(this.state.notes)
+  }
 
   render() {
     return (
       <noteContext.Provider
-       value={this.state}>
+       value={{state: this.state,
+                handleUpdateList: this.handleDeleteNote}}
+       >
       <div className='App'>
         <nav>
           <Link to='/'>Note List</Link>

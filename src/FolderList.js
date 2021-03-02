@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import noteContext from './noteContext';
 
 export default function FolderList(props){
-  const folderList = useContext(noteContext).folders;
+  const folderList = useContext(noteContext).state.folders;
   
   return(
     <ul className="folderList">

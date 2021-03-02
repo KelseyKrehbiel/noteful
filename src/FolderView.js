@@ -11,7 +11,7 @@ export default function FolderView(props){
   //display folder name on left side
   //display list of notes that belong to folder
   //need a button to go back to list
-  const folderNotes = useContext(noteContext).notes.filter((note)=>note.folderId === props.match.params.folderId);
+  const folderNotes = useContext(noteContext).state.notes.filter((note)=>note.folderId === props.match.params.folderId);
   console.log(folderNotes);
  
   return(

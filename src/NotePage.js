@@ -1,6 +1,7 @@
 import React,{useContext} from 'react'
-//import {NoteStore} from './dummy-store';
 import noteContext from './noteContext';
+import DeleteButton from './DeleteButton';
+
 //Display selected note
 
 export default function NotePage(props){
@@ -10,7 +11,7 @@ export default function NotePage(props){
   //get note and folder data from context
   const serverData = useContext(noteContext)
 
-  const noteData = serverData.notes.find(n =>
+  const noteData = serverData.state.notes.find(n =>
     n.id === noteId
   )
   if(!noteData){
@@ -24,7 +25,7 @@ export default function NotePage(props){
     )
   }
   //get get folder with id matching note
-  const folderData = serverData.folders.find(folder =>
+  const folderData = serverData.state.folders.find(folder =>
   folder.id === noteData.folderId
 )
 
@@ -34,11 +35,17 @@ export default function NotePage(props){
       <div className="folderList">
         {folderData.name}
       </div>
-      <p className="noteContent">
-        <h1>{noteData.name}</h1>
-        <p>{noteData.modified}</p>
-        {noteData.content}
-      </p>
+      <div className="noteContent">
+        <span className="NoteHeader">
+          <h1>{noteData.name}</h1>
+          <p>{noteData.modified}</p>
+          <DeleteButton noteId={noteId}/>
+        </span>
+        <p>
+          {noteData.content}
+        </p>
+        
+      </div>
     </div>
   )
   
