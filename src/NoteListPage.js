@@ -4,6 +4,7 @@ import FolderList from "./FolderList";
 import {Link} from 'react-router-dom';
 import noteContext from './noteContext';
 import DeleteButton from './DeleteButton';
+import AddNote from './AddNote';
 
 
 //display list of notes and folders
@@ -31,8 +32,11 @@ export default function NoteListPage(props) {
             </Link>
           </li>
         )}
-  
+        <li>
+          <AddNote/>
+        </li>
       </ul>
+      
       </div>
     </article>
   )

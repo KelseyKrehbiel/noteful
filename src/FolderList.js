@@ -2,6 +2,7 @@ import React,{useContext} from 'react'
 import { Link } from 'react-router-dom';
 //import {NoteStore} from './dummy-store'
 import noteContext from './noteContext';
+import AddFolder from './AddFolder';
 
 export default function FolderList(props){
   const folderList = useContext(noteContext).state.folders;
@@ -17,7 +18,9 @@ export default function FolderList(props){
           </li>
         )
       }
-    
+      <li>
+        <AddFolder/>
+      </li>
     </ul>
   )
 }

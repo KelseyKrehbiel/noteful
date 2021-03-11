@@ -54,11 +54,33 @@ class App extends Component {
     console.log(this.state.notes)
   }
 
+  handleAddFolder = (folderData) =>{
+    //take in new folder name and id
+    //add folder to state
+    //console.log(`adding folder to state`,folderData);
+    this.state.folders.push(folderData);
+    const currentFolders = this.state.folders;
+    //console.log("Current Folder", currentFolders);
+    this.setState({folders: currentFolders});
+    //console.log(this.state.folders);
+  }
+
+  handleAddNote = (noteData) =>{
+    //take in note data
+    //add note to state
+    console.log("Adding note to state",noteData);
+    this.state.notes.push(noteData);
+    const currentNotes = this.state.notes;
+    this.setState({notes: currentNotes})
+  }
+
   render() {
     return (
       <noteContext.Provider
        value={{state: this.state,
-                handleUpdateList: this.handleDeleteNote}}
+                handleUpdateList: this.handleDeleteNote,
+                handleAddFolder: this.handleAddFolder,
+                handleAddNote: this.handleAddNote}}
        >
       <div className='App'>
         <nav>
