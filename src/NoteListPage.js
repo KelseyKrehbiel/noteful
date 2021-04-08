@@ -1,45 +1,40 @@
-import React,{useContext} from 'react'
+import React, { useContext } from "react";
 //import {NoteStore} from './dummy-store'
 import FolderList from "./FolderList";
-import {Link} from 'react-router-dom';
-import noteContext from './noteContext';
-import DeleteButton from './DeleteButton';
-import AddNote from './AddNote';
-
+import { Link } from "react-router-dom";
+import noteContext from "./noteContext";
+import DeleteButton from "./DeleteButton";
 
 //display list of notes and folders
 
 export default function NoteListPage(props) {
-/*   const note = NoteStore.find(p =>
+  /*   const note = NoteStore.find(p =>
     p.notes.id === props.match.params.noteId
   ) */
   const notes = useContext(noteContext).state.notes;
-  console.log(notes);
+  //console.log(notes);
   return (
-    <article className='noteArticle'>
-      <h2>All Notes</h2>
+    <article className="noteArticle">
       <div className="listContainer">
-      <FolderList/>
-     
-      <ul className="noteList">
-        {notes.map(
-          note => 
-          <li key={note.id} className="noteItem">
-            <Link to={`/note/${note.id}`}>
-              <h3>{note.name}</h3>
-              <p>{note.modified}</p>
-              <DeleteButton noteId={note.id}/>
-            </Link>
+        <FolderList />
+
+        <ul className="noteList">
+          {notes.map((note) => (
+            <li key={note.id} className="noteItem">
+              <Link to={`/note/${note.id}`}>
+                <h3>{note.name}</h3>
+                <p>{note.modified}</p>
+                <DeleteButton noteId={note.id} />
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link to={"/addnote"}>Add Note</Link>
           </li>
-        )}
-        <li>
-          <AddNote/>
-        </li>
-      </ul>
-      
+        </ul>
       </div>
     </article>
-  )
+  );
 }
 
 /*

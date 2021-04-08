@@ -14,6 +14,8 @@ export default function NotePage(props){
   const noteData = serverData.state.notes.find(n =>
     n.id === noteId
   )
+
+
   if(!noteData){
     //error
     console.log("note not found");
@@ -27,24 +29,43 @@ export default function NotePage(props){
   //get get folder with id matching note
   const folderData = serverData.state.folders.find(folder =>
   folder.id === noteData.folderId
+
 )
+  const cleanDate = new Date(noteData.modified);
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const USdate = new Intl.DateTimeFormat('en-US', options).format(cleanDate);
 
   return(
     <div className="listContainer">
 
       <div className="folderList">
-        {folderData.name}
+
+        <button type="button" className="largeButton"
+          onClick={(e) => {
+            e.preventDefault();
+            props.history.goBack();
+          }
+          }
+        >
+          Go Back
+        </button>
+
+        <h2>{folderData.name}</h2>
+  
       </div>
       <div className="noteContent">
-        <span className="NoteHeader">
-          <h1>{noteData.name}</h1>
-          <p>{noteData.modified}</p>
-          <DeleteButton noteId={noteId}/>
-        </span>
+        <section className="noteHeader">
+  
+          <h2>{noteData.name}</h2>
+  
+          <div className="dateDelete">
+            <p>Date modified on {USdate}</p>
+            <DeleteButton noteId={noteId}/>
+          </div>
+        </section>
         <p>
           {noteData.content}
         </p>
-        
       </div>
     </div>
   )

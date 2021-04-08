@@ -5,6 +5,8 @@ import FolderView from './FolderView';
 import NotePage from './NotePage';
 import config from './config';
 import noteContext from './noteContext'
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
 //import {NoteStore} from './dummy-store';
 
 class App extends Component {
@@ -83,11 +85,13 @@ class App extends Component {
                 handleAddNote: this.handleAddNote}}
        >
       <div className='App'>
-        <nav>
-          <Link to='/'>Note List</Link>
-        </nav>
+
         <header>
-          <h1>Noteful</h1>
+          <nav>
+            <h1>
+            <Link to='/'>Noteful</Link>
+            </h1>
+          </nav>
         </header>
         <main>
           <Route
@@ -101,6 +105,14 @@ class App extends Component {
           <Route
             path='/note/:noteId'
             component={NotePage}
+          />
+          <Route
+            path='/addfolder'
+            component={AddFolder}
+          />
+          <Route
+            path='/addnote'
+            component={AddNote}
           />
         </main>
         <footer>

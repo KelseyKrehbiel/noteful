@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 code {
@@ -15,19 +17,24 @@ code {
 nav{
   margin: auto;
   text-align: center;
-  background-color: aliceblue;
+  background-color: white;
 }
 
 h1,h2,h3{
   text-align: center;
 }
+section>h2{
+  text-align: left;
+}
 
 ul {
   list-style-type: none;
+  padding: 0%;
+
 }
 
-li{
-  background-color: ghostwhite;
+li,section{
+  background-color: white;
   border-color: black;
   border-style: solid;
   border-width: 2px;
@@ -35,7 +42,7 @@ li{
 }
 
 p{
-  background-color: ghostwhite;
+  background-color: white;
   border-color: black;
 }
 
@@ -43,6 +50,19 @@ a{
   color: black;
   font-style: normal;
   text-decoration: none;
+}
+
+button{
+  background-color: white;
+  font-size: medium;
+  line-height: normal;
+  border-style: solid;
+  border-color: black;
+}
+
+.largeButton{
+  width: 90%;
+  height: 40px;
 }
 
 .listContainer{
@@ -60,8 +80,26 @@ a{
   flex-grow: 1;
 }
 
+.dateDelete{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+
 .folderList{
   flex-basis: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+.folderName{
+  display: block;
+}
+
+.hidden {
+  display: none;
 }
 
 footer{

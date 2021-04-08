@@ -6,76 +6,90 @@ The folder should be selected from a list of existing folders.
 Ensure that errors are properly handled. 
 Add a button to the note list page to invoke this new form.
 */
-import React,{useContext} from 'react';
-import config from './config';
-import noteContext from './noteContext';
+import React, { useContext, useState } from "react";
+import config from "./config";
+import noteContext from "./noteContext";
 
-export default function Addnote(props){
+export default function Addnote(props) {
   //do stuff
   const handleAddNote = useContext(noteContext).handleAddNote;
+  const [error, setError] = useState("");
   const folderList = useContext(noteContext).state.folders;
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      name: e.target.noteName.value,
-      content: e.target.noteContent.value,
-      folderId: e.target.folderName.value
+      name: e.target.noteName.value.trim(),
+      content: e.target.noteContent.value.trim(),
+      folderId: e.target.folderName.value,
+    };
+    if (!formData.name) {
+      return setError("Note name is required");
     }
-    console.log('note data: ', formData);
+    console.log("note data: ", formData);
     //add note to database
-    POSTNote(formData)
+    POSTNote(formData);
+  };
 
-  }
-
-  const POSTNote = (formData) =>{
+  const POSTNote = (formData) => {
     const noteJson = formData;
-    fetch(`${config.API_ENDPOINT}/notes`,{
-      method: 'POST',
+    fetch(`${config.API_ENDPOINT}/notes`, {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(noteJson)
+      body: JSON.stringify(noteJson),
     })
-    .then((noteResponse) => noteResponse.json())
-    .then(data => {
-      const noteData = {
-        name: data.name,
-        content: data.content,
-        folderId: data.folderId,
-        id: data.id
-      }
-      //update state
-      handleAddNote(noteData);
-      console.log("Added note to database")
-    } 
-    )
-  }
+      .then((noteResponse) => noteResponse.json())
+      .then((data) => {
+        const noteData = {
+          name: data.name,
+          content: data.content,
+          folderId: data.folderId,
+          id: data.id,
+        };
+        //update state
+        handleAddNote(noteData);
+        console.log("Added note to database");
+        props.history.push("/");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setError("Error trying to create note");
+      });
+  };
 
-  return(
+  return (
     <div>
-      <form className="noteName" onSubmit={e => handleSubmit(e)}>
+      <form className="noteName" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="Name">Name</label>
-        <input type="text" className="textInput"
-        name="noteName" id="noteName"/>
+        <input
+          type="text"
+          className="textInput"
+          name="noteName"
+          id="noteName"
+        />
         <label htmlFor="Content">Content</label>
-        <input type="textarea" className="textInput"
-        name="noteContent" id="noteContent"/>
+        <input
+          type="textarea"
+          className="textInput"
+          name="noteContent"
+          id="noteContent"
+        />
 
         <label htmlFor="Folder">Folder</label>
         <select className="textInput" name="folderName" id="folderName">
-          {folderList.map(
-            folder => 
-          <option key={folder.id} className="folderItem" value={folder.id}>
-            {folder.name}
-          </option>
-          )
-          }
+          {folderList.map((folder) => (
+            <option key={folder.id} className="folderItem" value={folder.id}>
+              {folder.name}
+            </option>
+          ))}
         </select>
         <button type="submit" className="formButtton">
           Add
         </button>
       </form>
+      <p>{error}</p>
     </div>
-  )
+  );
 }

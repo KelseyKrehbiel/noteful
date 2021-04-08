@@ -3,7 +3,7 @@
  This form should submit the name of the new folder to the POST /folders endpoint on the server. 
  Ensure that any errors are properly handled. Add a button to the navigation to invoke the new form.
 */
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import config from './config';
 import noteContext from './noteContext';
 
@@ -11,10 +11,14 @@ import noteContext from './noteContext';
 export default function AddFolder(props){
   //do stuff
   const handleAddFolder = useContext(noteContext).handleAddFolder;
+  const [error,setError] = useState("");
   const handleSubmit = (e) =>{
     e.preventDefault();
-    const folderName = e.target.folderName.value;
-    console.log('Folder Name: ', folderName);
+    const folderName = e.target.folderName.value.trim();
+    if(!folderName){
+      return setError("Folder name is required")
+    }
+    //console.log('Folder Name: ', folderName);
     POSTFolder(folderName)
     //add folder to state
   }
@@ -31,26 +35,31 @@ export default function AddFolder(props){
     })
     .then((folderResponse) => folderResponse.json())
     .then(data => {
-      console.log("Added folder to database", data);
+      //console.log("Added folder to database", data);
       const folderData = {id: data.id,
                           name: data.name}
-      handleAddFolder(folderData);      
+      handleAddFolder(folderData);
+      props.history.push('/')      
     })
     .catch((error) => {
       console.error('Error:', error);
+      setError("Error trying to create folder")
     })
     
   }
 
   return(
     <div>
-      <form className="FolderName" onSubmit={e => handleSubmit(e)}>
+      <form className="folderName" onSubmit={e => handleSubmit(e)}>
         <label htmlFor="folderName">Folder Name</label>
-        <input type="text" className="textInput"
-        name="folderNamw" id="folderName"/>
-        <button type="submit" className="formButtton">
+        <input type="text" className="textInput" 
+        name="folderName" id="folderName" required/>
+        <button type="submit" className="formButton">
           Add
         </button>
+        <p>
+          {error}
+        </p>
       </form>
     </div>
   )
