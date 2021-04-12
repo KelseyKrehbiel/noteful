@@ -7,6 +7,7 @@ import config from './config';
 import noteContext from './noteContext'
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
+import ErrorBoundary from './ErrorBoundry';
 //import {NoteStore} from './dummy-store';
 
 class App extends Component {
@@ -93,6 +94,7 @@ class App extends Component {
             </h1>
           </nav>
         </header>
+        <ErrorBoundary>
         <main>
           <Route
             exact path='/'
@@ -115,6 +117,7 @@ class App extends Component {
             component={AddNote}
           />
         </main>
+        </ErrorBoundary>
         <footer>
           <p>noteful. the page full of notes</p>
         </footer>

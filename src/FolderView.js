@@ -3,6 +3,7 @@ import React,{useContext} from 'react'
 import {Link} from 'react-router-dom';
 import FolderList from './FolderList';
 import noteContext from './noteContext';
+import DeleteButton from './DeleteButton';
 
 //display list of folders on left side of page
 //contents of folder in center of page
@@ -28,6 +29,9 @@ export default function FolderView(props){
                 <h3>{note.name}</h3>
                 <p>{note.modified}</p>
               </Link>
+              <DeleteButton
+                noteId = {note.id}
+              />
             </li>
           )}
       </ul>

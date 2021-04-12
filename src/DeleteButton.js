@@ -1,6 +1,7 @@
-import React,{useContext} from 'react';
-import config from './config';
-import noteContext from './noteContext';
+import React, { useContext } from "react";
+import config from "./config";
+import noteContext from "./noteContext";
+import PropTypes from "prop-types";
 /*
 delete button for notes
 Implement the delete button for each note in the list in the main route and folder route.
@@ -16,39 +17,48 @@ fetch(`http://localhost:1234/foo/${fooId}`, {
 })
 */
 
-export default function DeleteButton (props) {
+export default function DeleteButton(props) {
   const contextFunction = useContext(noteContext).handleUpdateList;
-
 
   const handleDeleteNote = (noteID) => {
     //when delete button clicked delete note
-    console.log(`Deleting ${noteID}`)
+    console.log(`Deleting ${noteID}`);
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteID}`,{
-      method: 'DELETE',
+    fetch(`${config.API_ENDPOINT}/notes/${noteID}`, {
+      method: "DELETE",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-    })
-    .then(()=>contextFunction(noteID)
-    )
+    }).then(() => {
+      contextFunction(noteID)
+      if(props.history){
+        console.log(props.history)
+        if(props.history.length <= 2){
+          props.history.push("/")
+        }
+        else{
+          props.history.goBack();
+        }
+      }
+
+      });
     //update state
     //use updateDB function in context from App.js
-    
+  };
 
-  }
-
-
-
-  
-  return(
-    <button type="button"
-    onClick={(event) => {
-      event.preventDefault();
-      handleDeleteNote(props.noteId
-    )}}
-    >Delete
+  return (
+    <button
+      type="button"
+      onClick={(event) => {
+        event.preventDefault();
+        handleDeleteNote(props.noteId);
+      }}
+    >
+      Delete
     </button>
-  )
-  
+  );
+}
+DeleteButton.propTypes = {
+  noteId: PropTypes.string.isRequired,
+  history: PropTypes.any
 }

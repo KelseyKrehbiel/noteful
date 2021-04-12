@@ -22,6 +22,7 @@ export default function Addnote(props) {
       name: e.target.noteName.value.trim(),
       content: e.target.noteContent.value.trim(),
       folderId: e.target.folderName.value,
+      modified: new Date()
     };
     if (!formData.name) {
       return setError("Note name is required");
@@ -42,14 +43,9 @@ export default function Addnote(props) {
     })
       .then((noteResponse) => noteResponse.json())
       .then((data) => {
-        const noteData = {
-          name: data.name,
-          content: data.content,
-          folderId: data.folderId,
-          id: data.id,
-        };
+
         //update state
-        handleAddNote(noteData);
+        handleAddNote(data);
         console.log("Added note to database");
         props.history.push("/");
       })
