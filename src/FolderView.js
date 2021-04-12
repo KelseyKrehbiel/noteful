@@ -3,6 +3,8 @@ import React,{useContext} from 'react'
 import {Link} from 'react-router-dom';
 import FolderList from './FolderList';
 import noteContext from './noteContext';
+import DeleteButton from './DeleteButton';
+import PropTypes from "prop-types";
 
 //display list of folders on left side of page
 //contents of folder in center of page
@@ -11,7 +13,7 @@ export default function FolderView(props){
   //display folder name on left side
   //display list of notes that belong to folder
   //need a button to go back to list
-  const folderNotes = useContext(noteContext).notes.filter((note)=>note.folderId === props.match.params.folderId);
+  const folderNotes = useContext(noteContext).state.notes.filter((note)=>note.folderId === props.match.params.folderId);
   console.log(folderNotes);
  
   return(
@@ -28,6 +30,9 @@ export default function FolderView(props){
                 <h3>{note.name}</h3>
                 <p>{note.modified}</p>
               </Link>
+              <DeleteButton
+                noteId = {note.id}
+              />
             </li>
           )}
       </ul>
@@ -40,3 +45,6 @@ The folder-id will reference an id of one of the folders in state
 The main section should display only the notes that are "in" the selected folder
 The sidebar should display the folder list with the selected folder highlighted
 */
+FolderView.propTypes = {
+  folderId: PropTypes.string
+}
