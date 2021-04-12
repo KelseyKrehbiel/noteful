@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 //import {NoteStore} from './dummy-store'
 import noteContext from "./noteContext";
 
-export default function FolderList(props) {
+export default function FolderList() {
   const folderList = useContext(noteContext).state.folders;
 
   return (

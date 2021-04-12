@@ -6,6 +6,7 @@
 import React, { useContext,useState } from 'react';
 import config from './config';
 import noteContext from './noteContext';
+import PropTypes from "prop-types";
 
 
 export default function AddFolder(props){
@@ -63,4 +64,7 @@ export default function AddFolder(props){
       </form>
     </div>
   )
+}
+AddFolder.propTypes = {
+  history: PropTypes.any
 }

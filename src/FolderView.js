@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import FolderList from './FolderList';
 import noteContext from './noteContext';
 import DeleteButton from './DeleteButton';
+import PropTypes from "prop-types";
 
 //display list of folders on left side of page
 //contents of folder in center of page
@@ -44,3 +45,6 @@ The folder-id will reference an id of one of the folders in state
 The main section should display only the notes that are "in" the selected folder
 The sidebar should display the folder list with the selected folder highlighted
 */
+FolderView.propTypes = {
+  folderId: PropTypes.string
+}

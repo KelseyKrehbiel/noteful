@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import noteContext from "./noteContext";
 import DeleteButton from "./DeleteButton";
+import PropTypes, { string } from "prop-types";
 
 //Display selected note
 
@@ -48,10 +49,7 @@ export default function NotePage(props) {
 
           <div className="dateDelete">
             <p>Date modified on {USdate}</p>
-            <DeleteButton 
-              noteId={noteId}
-              history={props.history}  
-             />
+            <DeleteButton noteId={noteId} history={props.history} />
           </div>
         </section>
         <p>{noteData.content}</p>
@@ -59,3 +57,7 @@ export default function NotePage(props) {
     </div>
   );
 }
+NotePage.propTypes = {
+  history: PropTypes.any,
+  noteId: string,
+};

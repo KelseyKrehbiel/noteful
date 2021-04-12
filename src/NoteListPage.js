@@ -7,10 +7,7 @@ import DeleteButton from "./DeleteButton";
 
 //display list of notes and folders
 
-export default function NoteListPage(props) {
-  /*   const note = NoteStore.find(p =>
-    p.notes.id === props.match.params.noteId
-  ) */
+export default function NoteListPage() {
   const notes = useContext(noteContext).state.notes;
   //console.log(notes);
   return (

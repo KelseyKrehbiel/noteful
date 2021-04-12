@@ -9,8 +9,9 @@ Add a button to the note list page to invoke this new form.
 import React, { useContext, useState } from "react";
 import config from "./config";
 import noteContext from "./noteContext";
+import PropTypes from 'prop-types';
 
-export default function Addnote(props) {
+export default function AddNote(props) {
   //do stuff
   const handleAddNote = useContext(noteContext).handleAddNote;
   const [error, setError] = useState("");
@@ -88,4 +89,7 @@ export default function Addnote(props) {
       <p>{error}</p>
     </div>
   );
+}
+AddNote.propTypes = {
+  history: PropTypes.any
 }
